@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 /*
-    Disclaimer: The contract was created based off specific requirements provided by a client.
+    Disclaimer: Created based off specific requirements provided by a client.
     Ideally, a large portion of the data here should be stored off-chain.
+    Ignores some fairly crucial security checks. Not production ready. 
 */
 
 pragma solidity >= 0.8.0; 
@@ -16,7 +17,7 @@ contract CarInsurance {
     uint256 public constant TPFT_MAX_PAYOUT = 2.8 ether;
     uint256 public constant CC_MAX_PAYOUT = 3.5 ether;
 
-    address private immutable _owner;
+    address private immutable _owner = msg.sender;
     uint256 private _counter;   
     
 
@@ -60,8 +61,6 @@ contract CarInsurance {
         _checkBanned();
         _;
     }
-
-    constructor() { _owner = msg.sender; }
 
     receive() external payable {}
 
